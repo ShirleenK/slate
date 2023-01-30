@@ -2,14 +2,11 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
+  - http
+  - php
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -20,226 +17,286 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Invoice Review API
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Welcome to the Invoice Review API.
 
 # Authentication
 
-> To authorize, use this code:
+> To authorize:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```php
+# Add the route
+```
+```http
+https://{{url}}{{linkid:}}
 ```
 
-```python
-import kittn
+> Make sure to replace with your API key.
 
-api = kittn.authorize('meowmeowmeow')
-```
+Invoice Review uses API keys to allow access to the API.
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
+Invoice Review expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`Authorization: API-Key`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>API-Key</code> with your personal API key.
 </aside>
 
-# Kittens
+# Invoice Review
 
-## Get All Kittens
+## GET Invoice Review
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+```php
+# Add the route.
+```
+```http
+https://{{url}}{{linkid:}}
 ```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> The above http request returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "type": "Purchase Invoice",
+  "date": "26/01/2023",
+  "dueDate": "26/02/2023",
+  "budgetId": "",
+  "addedById": "",
+  "departmentId": null,
+  "description": "",
+  "invNo": "INV#1000",
+  "currency": "EUR",
+  "lines": [
+    {
+      "categoryId": "",
+      "description": "",
+      "showCode": "APA 2",
+      "net": 20.00,
+      "VAT": 0.00,
+      "total": 20.00
+    },
+  ]
+}
+
+```
+
+This endpoint retrieves a specific Invoice Review.
+
+### HTTP Request
+
+`GET https://{{url}}{{linkid:}}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the Invoice Review to retrieve
+
+<aside class="notice">
+The <code>linkId</code> is the main Id used to retrieve the data.
+</aside>
+
+## PATCH Invoice Review
+
+```php
+# Add the route.
+```
+
+```http
+  https://{{url}}{{linkid:}}
+```
+
+> The above http request returns JSON structured like this:
+
+```json
+{
+  "type": "Purchase Invoice",
+  "date": "26/01/2023",
+  "dueDate": "26/02/2023",
+  "budgetId": "",
+  "addedById": "",
+  "departmentId": null,
+  "description": "",
+  "invNo": "INV#1000",
+  "currency": "EUR",
+  "lines": [
+    {
+      "categoryId": "",
+      "description": "",
+      "showCode": "APA 2",
+      "net": 20.00,
+      "VAT": 0.00,
+      "total": 20.00
+    },
+  ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint edit a specific Invoice Review.
+
+### HTTP Request
+
+`PATCH https://{{url}}{{linkid:}}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the Invoice Review to edit
+
+## GET Comment
+
+```php
+# Add the route.
+```
+
+```http
+  https://{{url}}{{linkid:}}
+```
+
+> The above http request returns JSON structured like this:
+
+```json
+{
+  "count": 1,
+  "data": [
+    {
+      "addedById": "",
+      "dateTime": "",
+      "comment": "Some comment will be displayed here"
+    }
+  ]
+}
+
+```
+
+This endpoint edit a specific Comment on a Invoice Review.
+
+### HTTP Request
+
+`PATCH https://{{url}}{{linkid:}}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the Comment to get
+ID | The Id of the comments to retrieve
+
+## GET File Uploads
+
+```php
+# Add the route.
+```
+
+```http
+  https://{{url}}{{linkid:}}
+```
+
+> The above http request returns JSON structured like this:
+
+```json
+{
+  "count": 3,
+  "files": [
+    "1st_image.png",
+    "2nd_image.jpg",
+    "3rd_document.pdf"
+  ]
+}
+
+```
+
+This endpoint get all the File Uploads on a Invoice Review.
+
+### HTTP Request
+
+`GET https://{{url}}{{linkid:}}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the images to get
+ID | The ID of the images to retrieve.
+
+## GET Beneficiary
+
+```php
+# Add the route.
+```
+```http
+https://{{url}}{{linkid:}}
+```
+
+> The above http request returns JSON structured like this:
+
+```json
+{
+  "supplierid": "813cd784-fd65-49f6-b7ff-ab52f63f18be",
+  "suppliername": "Supplier with a very long name to test the input width restriction",
+  "beneficiaries": {
+      "providers": {
+          "813cd784-fd65-49f6-b7ff-ab52f63f18be": {
+              "beneficiary_details": {
+                  "Currency": "EUR",
+                  "AccountIdentifier": "MC5814607007647022122585228",
+                  "BankIdentifier_1": "CCBPMCM1",
+                  "AddressLine1": "LE MONTAIGNE BUR N1 A1 1A2 BLOCA",
+                  "FirstName": "ASM ANTEXIS",
+                  "LastName": " ",
+                  "CountryCode": "MC",
+                  "AddressLine2": "2 AVENUE DE LA MADONE 98000 MONACO"
+              },
+              "payment_methods": {
+                  "SEPA Payment": "2"
+              },
+              "addedby": "2e96abc8-0851-7f62-6f68-5e3c279747d7",
+              "approved": true
+          }
+      }
+  },
+  "currency": "AUD",
+  "contactname": null,
+  "contacttitle": null,
+  "phone": null,
+  "mobile": null,
+  "email": null,
+  "website": null,
+  "address": null,
+  "baname": null,
+  "bano": null,
+  "sortcode": null,
+  "bic": null,
+  "iban": null,
+  "vatcountry": null,
+  "vatnumber": null,
+  "vatrate": "0.00",
+  "reciteration": "1"
+}
+
+
+```
+
+This endpoint retrieves a the beneficiary for an Invoice Review.
+
+### HTTP Request
+
+`GET https://{{url}}{{linkid:}}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the Invoice Review to retrieve.
+ID | The ID of the beneficiary to retrieve.
+
 
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
